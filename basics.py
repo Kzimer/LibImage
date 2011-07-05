@@ -11,9 +11,6 @@ def fromdata(data, mode, size):
     im.putdata(data)
     return im
 
-"""
-    Fonctions géométrique
-"""
 def xy2pos(x, y, size):
     return y * size[0] + x
     
@@ -26,9 +23,6 @@ def dist(pos1, pos2, size):
     return ( (p1[0] - p2[0])**2 + (p1[1] - p2[1])**2 )**(1./2.)
     
 
-"""
-    Fonctions traitement image
-"""    
 def rgb2hsl(r, g, b):
     var_R = (r / 255.)
     var_G = (g / 255.)
@@ -68,6 +62,9 @@ def rgb2hsl(r, g, b):
 
 
 def hsl2rgb(t, s, l):
+    """
+    TODO
+    """
     return 0,0,0
 
 def get_pix_lumi(pixel):
@@ -91,12 +88,12 @@ def vignetage(im, value, intensity):
 def saturation(im, value):
     data = im.getdata()
 
-"""
-    Fonction sur l'histogramme
-    retourne une courbe de bezier traitement 3 composantes identique
-    ou 3 (une par composante r,v,b)
-"""
 def appli_bezier(im, courbe):
+    """
+        Fonction sur l'histogramme
+        retourne une courbe de bezier traitement 3 composantes identique
+        ou 3 (une par composante r,v,b)
+    """
     im.getdata()
     if isinstance(courbe, list):
         comp = [ fromdata([courbe[v] for v in c.getdata()], 'L', im.size) for c in im.split() ]
@@ -115,8 +112,6 @@ def contraste(im,c):
     return appli_bezier(im, table)
 
 
-"""
-"""
 def draw_histogramme(data, filename, hauteur = 200):
     histo = histogramme(data)
     
@@ -142,6 +137,10 @@ def histogramme(data):
         
 
 def main():
+    """
+        Example 
+        increase the contrast
+    """
     filename = sys.argv[1]
     im = Image.open(filename)
     new = contraste(im, 50)
